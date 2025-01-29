@@ -11,11 +11,31 @@
     margin: auto auto;
     transition: all 300ms;
     height: auto;
+    animation: slide-out 1s 2s forwards;
+    position: absolute;
+    transform: scale(0.8);
   }
   .letter:hover{
     transform: rotateX(15deg) rotateY(-15deg);
     box-shadow: 15px 15px 10px rgb(0 0 0 / 0.3)
   }
+  
+  @keyframes slide-out{
+    0% {
+      transform: scale(0.8);
+      bottom: 0;
+      
+    }
+    50%{
+      bottom: 100%;
+    }
+    100% {
+      z-index: 10000;
+      bottom: 0;
+      transform: scale(1.0);
+    }
+  }
+
   .content{
     padding: 10px 10px;
   }
@@ -31,14 +51,15 @@
     text-align: right;
     width: 100%;
   }
+  
   .envelope{
+    position: relative;
     background-color: white;
     border: solid black;
     width: 38rem;
     height: 38rem;
     perspective: 1000px;
-    animation-iteration-count: infinite;
-    animation: turn-out;
+    animation: turn-out 3s forwards;
     transform: rotateX(0deg) rotateY(0deg);
   }
   
@@ -46,12 +67,50 @@
     0% {
       transform: rotateX(0deg) rotateY(0deg);
     }
-    100% {
+    10% {
       transform: rotateX(15deg) rotateY(-15deg);
       box-shadow: 15px 15px 10px rgb(0 0 0 / 0.3);
     }
+    90%{
+      transform: rotateX(15deg) rotateY(-15deg);
+      box-shadow: 15px 15px 10px rgb(0 0 0 / 0.3);
+    }
+    100% {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
   }
   
+  .body {
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    bottom: 0;
+    background-color: white;
+    z-index: 10;
+
+    
+  }
+  .flap {
+    position: absolute;
+    width: 100%;
+    height: 35%;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    transform-origin: top;
+    border: solid black;
+    animation: open 1s 1s forwards;
+  }
+  
+  @keyframes open{
+    0% {
+      transform: rotateX(0deg);
+    }
+    100% {
+      transform: rotateX(160deg);
+    }
+  }
+
   
 
 </style>
@@ -59,11 +118,9 @@
 
 <body>
   <div class="envelope">
-    <div class="body"></div>
     <div class="flap"></div>
-    
-  </div>
-  <div class="letter">
+    <div class="body"></div>
+    <div class="letter">
     <h1>Dear Internet,</h1>
     <div class="content">
       <p>
@@ -87,6 +144,9 @@
       <span>Ron Kiehn</span>
     </div>
   </div>
+    
+  </div>
+  
   
 </body>
 
